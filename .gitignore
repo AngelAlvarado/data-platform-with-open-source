@@ -1,0 +1,15 @@
+elasticsearch/storage
+elasticsearch
+mysql/storage
+redis/storage
+rails/datalake/tmp
+superset/storage
+streamsets/storage
+streamsets/errors
+streamsets/config
+streamsets/libs
+mysql/.mysql.env
+redis/.redis.env
+streamsets/.streamsets.env
+rails/.rails.env
+superset/.superset.env
