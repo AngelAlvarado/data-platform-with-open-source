@@ -1,0 +1,59 @@
+@startuml
+skinparam rectangle {
+    roundCorner<<Data Sources>> 25
+}
+
+rectangle "Data Pipelines" {
+    component Mysql_Pipeline [
+      Streamsets
+      Spark
+    ]
+    component Streamsets_Pipeline [
+      Streamsets
+      Java
+    ]
+}
+
+rectangle "Scheduled Jobs" {
+    component [Remote Job]
+    component [Scheduled Job]
+    [Remote Job] --> [Mysql_Pipeline]
+    [Scheduled Job] --> [Streamsets_Pipeline]
+}
+
+
+rectangle <<Data Sources>> {
+    database DBs
+    cloud APIs
+	[DBs] --> [Mysql_Pipeline]
+	[APIs] --> [Streamsets_Pipeline]
+}
+
+
+rectangle "Data Store" {
+    database Mysql_Rails [
+        Mysql_Rails
+    ]
+    component Rails [
+      Rails:
+      Background jobs
+      Data platform schema
+    ]
+    [Mysql_Rails] <-- [Streamsets_Pipeline]
+}
+
+rectangle "Dashboard" {
+    artifact dashboard [
+        Superset
+        Flask-Python
+    ]
+    database Cache [
+        Redis
+    ]
+
+    dashboard <- Mysql_Rails
+    dashboard <-> Cache
+    Cache <- Mysql_Rails
+}
+
+@enduml
