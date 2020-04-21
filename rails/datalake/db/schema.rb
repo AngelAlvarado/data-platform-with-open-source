@@ -10,12 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_075649) do
+ActiveRecord::Schema.define(version: 2020_04_19_092328) do
+
+  create_table "counties", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.decimal "latitude", precision: 13, scale: 7
+    t.decimal "longitude", precision: 13, scale: 7
+    t.string "state"
+    t.string "name"
+    t.integer "fips"
+    t.integer "ansicode"
+    t.integer "awater"
+    t.integer "aland"
+    t.decimal "aland_sqmi", precision: 10
+    t.decimal "awater_sqmi", precision: 10
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "covidcases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.date "date"
-    t.decimal "lat", precision: 10
-    t.decimal "lon", precision: 10
+    t.decimal "latitude", precision: 13, scale: 7
+    t.decimal "longitude", precision: 13, scale: 7
     t.string "county"
     t.string "state"
     t.integer "fips"
