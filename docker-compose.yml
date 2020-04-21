@@ -5,6 +5,7 @@ services:
     image: redis
     volumes:
       - ./redis/storage:/data
+    container_name: sgredis
   sgmysql:
     image: mysql:5.7.21
     #command: mysqld --default-authentication-plugin=mysql_native_password --skip-mysqlx
@@ -14,6 +15,7 @@ services:
       - ./mysql/storage:/var/lib/mysql
     ports:
       - "3306:3306"
+    container_name: sgmysql
   sgstreamsets:
     build: ./streamsets
     #command: "${SDC_DIST}/bin/streamsets" stagelibs -install="${SDC_LIBS}"
@@ -25,10 +27,11 @@ services:
       - "18630:18630"
     volumes:
       - ./streamsets/storage:/data
+      - ./streamsets/pipelines:/pipelines
       - ./streamsets/errors:/errors:rw
       - ./streamsets/extras:/opt/streamsets-datacollector-3.14.0/streamsets-libs-extras
       #- ./streamsets/libs:/opt/streamsets-datacollector-3.14.0/streamsets-libs
-    container_name: streamsets
+    container_name: sgstreamsets
   sgsuperset:
     image: amancevice/superset:0.35.2
     depends_on:
@@ -38,8 +41,8 @@ services:
       - ./superset/.superset.env
     ports:
       - "8088:8088"
-    volumes:
-      - ./superset/storage:/etc/superset
+    # volumes:
+    #   - ./superset:/etc/superset
     container_name: sgsuperset
   sgrails:
     build: ./rails
@@ -57,16 +60,6 @@ services:
     env_file:
       - ./rails/.rails.env
     container_name: sgrails
-  # elasticsearch:
-  #   image: elasticsearch:5.2.0
-  #   volumes:
-  #     - ./elasticsearch/storage:/usr/share/elasticsearch/data
-  #   ports:
-  #    - "9200:9200"
-  #    - "9300:9300"
-  #   env_file:
-  #     - ./elasticsearch/.elasticsearch.env
-  #   container_name: sgelastic
 networks:
   default:
     name: sgvirtual
