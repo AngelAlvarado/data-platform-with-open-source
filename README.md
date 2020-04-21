@@ -7,8 +7,7 @@ Docker and Docker-compose orchestes all the containers
 
 ## Datasets
 
-This data platform uses the [New York Times](https://github.com/nytimes/covid-19-data
-) dataset to analyze COVID19 cases at the county level across the US
+This data platform uses the [New York Times](https://github.com/nytimes/covid-19-data) dataset to analyze COVID19 cases at the county level across the US
 
 ## Set-up
 
@@ -49,7 +48,7 @@ Additional basic performance for Supersets:
 
 * Use a Vault to store credentials
 
-### Error handeling 
+### Error handling 
 
 Pipelines in Streamsets can handle error at the pipeline level or stage level. Given that we are assuming NYT data has FIPS and 89 records were ignored while inserting into the database: 
 
@@ -84,9 +83,7 @@ These are stored in the folder /streamsets/errors for later analisis.
 * Mysql version 8 and above has changed their (authentication method)[https://stackoverflow.com/questions/49963383/authentication-plugin-caching-sha2-password]. This platform uses Mysql 5.x but it's recommended to use MariaDB or Postgres.
 
 
-fips race, etnicity by county from American Community Survey 2018 5-year estimates https://data.census.gov/cedsci/table?q=county%20race%20etnicity&hidePreview=true&tid=ACSDP5Y2018.DP05&vintage=2018&moe=false&g=0100000US.050000
-
-https://stackoverflow.com/questions/50295010/is-there-a-way-to-create-read-only-dashboard-in-apache-superset
+* @todo make the dashboard public: https://stackoverflow.com/questions/50295010/is-there-a-way-to-create-read-only-dashboard-in-apache-superset
 
 
 ### Scheduling jobs
@@ -97,12 +94,16 @@ o
 
 ### Resources
 
+Counties with FIPS from census data: https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html 
+
+US population by county (includes FIPS): https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv
+
+Race, etnicity by county (includes FIPS) from American Community Survey 2018 5-year estimates: https://data.census.gov/cedsci/table?q=county%20race%20etnicity&hidePreview=true&tid=ACSDP5Y2018.DP05&vintage=2018&moe=false&g=0100000US.050000
+
+
+NYT made some teaks some county FIPS which are not accounted in this project. Here's a wayt to handle these edge cases https://www.arcgis.com/home/item.html?id=53935d5d1c8540539d290072fcda77c1
+
+
 Not used here but popular website to get geolocalization data http://www.datasciencetoolkit.org/	
 	https://www.esri.com/arcgis-blog/products/arcgis-pro/3d-gis/how-to-map-new-york-times-coronavirus-time-series-data-in-arcgis-pro/
 	https://www.arcgis.com/home/item.html?id=b42b1e3daf96457b804a1246ee3d4a10
-take into account county/fips https://www.arcgis.com/home/item.html?id=53935d5d1c8540539d290072fcda77c1
-
-fips counties from census data- https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html 
-
-US population by county https://www2.census.gov/programs-surveys/popest/datasets/2010-2019/counties/totals/co-est2019-alldata.csv
-
