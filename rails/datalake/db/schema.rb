@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_092328) do
+ActiveRecord::Schema.define(version: 2020_04_22_204736) do
 
   create_table "counties", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.decimal "latitude", precision: 13, scale: 7
@@ -19,12 +19,13 @@ ActiveRecord::Schema.define(version: 2020_04_19_092328) do
     t.string "name"
     t.integer "fips"
     t.integer "ansicode"
-    t.integer "awater"
-    t.integer "aland"
+    t.decimal "awater", precision: 10
+    t.decimal "aland", precision: 10
     t.decimal "aland_sqmi", precision: 10
     t.decimal "awater_sqmi", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "fips_s"
   end
 
   create_table "covidcases", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
@@ -38,6 +39,17 @@ ActiveRecord::Schema.define(version: 2020_04_19_092328) do
     t.integer "deaths"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "fips_s"
+    t.integer "county_population"
+  end
+
+  create_table "populations", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "county_name"
+    t.string "state_name"
+    t.integer "state_fips"
+    t.string "county_fips_s"
+    t.integer "county_fips"
+    t.integer "population"
   end
 
 end
